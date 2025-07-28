@@ -1,17 +1,8 @@
 <?php
 
-function change_status($id) {
-
-		// Загружаем задачу
-		$task = R::load('tasks', $id);
-
-		// Обновляем статус задачи 
-		if ($task->status === 'ready') {
-			$task->status = NULL;
-		} else {
-			$task->status = 'ready';
-		}
-
-		// Сохраняем статус задачи 
-		R::store($task);
+function change_status($id, $status = null) {
+    global $pdo;
+    if (!$status) return;
+    $stmt = $pdo->prepare("UPDATE tasks SET status = ? WHERE id = ?");
+    $stmt->execute([$status, $id]);
 }

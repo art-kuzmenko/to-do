@@ -1,6 +1,7 @@
 <?php 
 
 function task_delete($id) {
-    $task = R::load('tasks', $id);
-	R::trash($task);
+    global $pdo;
+    $stmt = $pdo->prepare("DELETE FROM tasks WHERE id = ?");
+    $stmt->execute([$id]);
 }

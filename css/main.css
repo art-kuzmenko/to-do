@@ -10,17 +10,21 @@ form {
 	min-height: 50px;
 }
 
-.list-group-item .btn-group {
-	display: none;
-}
-
-.list-group-item:hover .btn-group {
-	display: inline-flex;
-}
-
 .done {
 	text-decoration: line-through;
 	opacity: 0.5;
+}
+
+.new {
+	color: green;
+}
+
+.inprog {
+	color: orchid;
+}
+
+.decompose {
+	color: blue;
 }
 
 .main-link {

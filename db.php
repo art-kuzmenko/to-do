@@ -1,18 +1,17 @@
-<?php 
+<?php
 
-require_once(ROOT . 'libs/rb-mysql.php');
+global $pdo;
 
 try {
-     R::setup( 
-    'mysql:host=' . DB_HOST .';dbname='. DB_NAME,
-     DB_USER, 
-     DB_PASS
-); 
-
-if(!R::testConnection()){
-    throw new Exception("Could not connect to database");
-}
-
-} catch(Exception $e) {
+    $pdo = new PDO(
+        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8',
+        DB_USER,
+        DB_PASS,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
+} catch (PDOException $e) {
     die("Database connection error: " . $e->getMessage());
 }

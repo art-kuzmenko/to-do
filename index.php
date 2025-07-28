@@ -16,14 +16,14 @@
 		task_new($_POST['title']);
 	}
 
-	// Удаление задачи
-	if(isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id']) && is_numeric($_GET['id'])) {
-		task_delete($_GET['id']);
-	}
+	// Удаление задачи через POST
+	if(isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id']) && is_numeric($_POST['id'])) {
+    task_delete($_POST['id']);
+}
 
-	// Изменения статуса задачи 
-	if(isset($_GET['action']) && $_GET['action'] === 'changeStatus' && isset($_GET['id']) && is_numeric($_GET['id'])) {
-		change_status($_GET['id']);
+	// Изменения статуса задачи через POST
+	if(isset($_POST['action']) && $_POST['action'] === 'changeStatus' && isset($_POST['id']) && is_numeric($_POST['id']) && isset($_POST['status'])) {
+		change_status($_POST['id'], $_POST['status']);
 	}
 
 	// Получения списка всех задач 
@@ -57,6 +57,5 @@
 
 	<!-- Форма добавления задачи -->
 	<?php include(ROOT . 'templates/page_parts/form.tpl'); ?>
-
 </body>
 </html>
