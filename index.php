@@ -57,5 +57,33 @@
 
 	<!-- Форма добавления задачи -->
 	<?php include(ROOT . 'templates/page_parts/form.tpl'); ?>
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script>
+		$('select').on("change", function() {
+    	let val = $(this).val();
+    	let id = $(this).data('id');
+    	let $select = $(this);
+
+    $.post('', {
+        action: 'changeStatus',
+        id: id,
+        status: val
+    }, function(response) {
+        // Найти <span> с текстом задачи в том же <li>
+        let $li = $select.closest('li');
+        let $span = $li.find('span.todo-item-text');
+
+        // Удалить старые классы
+        $span.removeClass('new inprog decompose done');
+
+        // Добавить новый класс
+        if (val === 'new') $span.addClass('new');
+        if (val === 'inprog') $span.addClass('inprog');
+        if (val === 'decompose') $span.addClass('decompose');
+        if (val === 'done') $span.addClass('done');
+    });
+});
+	</script>
 </body>
 </html>
